@@ -3,60 +3,64 @@ package com.javierpastor.sharesave
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.javierpastor.sharesave.ui.theme.SharesaveTheme
+import com.javierpastor.sharesave.view.Pantalla2
 
+
+@ExperimentalMaterial3Api
 class MainActivity : ComponentActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             SharesaveTheme {
+
+                val navController = rememberNavController()
+                val home = Home(navController)
+
+                NavHost(
+                    navController = navController,
+                    startDestination = Router.Home.route
+                ) {
+                    composable(Router.Home.route) {
+                        Home(navController)
+                    }
+                    //Definimos la segunda pantalla
+                    composable(Router.Pantalla2.route){
+
+                        Pantalla2()
+                    }
+
+                }
+
+
+
+
+
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
                   //  Greeting("Android")
-                    ScaffoldExample()
+                   // ScaffoldExample()
 
                 }
             }
         }
     }
 }
-
+/** DEJO ESTE CODIGO, PERO LO TRASLADO A HOME PARA HACER UN NAVCONTROLLER
+ *
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
@@ -92,9 +96,9 @@ fun ScaffoldExample() {
                     modifier= Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center
                     )
-                }
+                } //title
             )
-        },
+        }, //topbar
         bottomBar = {
             BottomAppBar(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -131,7 +135,7 @@ fun ScaffoldExample() {
                 """.trimIndent(),
 
 
-            )
+            ) //text
 
             Image(
                 painter = painterResource(id = R.drawable.monedas), // Reemplaza con el ID de tu imagen
@@ -140,7 +144,7 @@ fun ScaffoldExample() {
                     .fillMaxWidth()
                     .height(200.dp) // Ajusta la altura según sea necesario
                     .clip(shape = MaterialTheme.shapes.medium)
-            )
+            ) //imagen
 
             LazyColumn {
                 items(listOf("-  Supermercados", "-  Ofertas", "-  Productos", "-  Ciudad")) { item ->
@@ -153,10 +157,11 @@ fun ScaffoldExample() {
                                 // Puedes navegar a otra pantalla, realizar alguna acción, etc.
                                 // Por ahora, puedes imprimir un mensaje en la consola
                                 println("Elemento clickeado: $item")
+
                             }
                     )
-                }
-            }
+                }//listof
+            }//lazy column
         }
     }
-}
+}**/
