@@ -23,6 +23,7 @@ class AddItemViewModel @Inject constructor() : ViewModel(){
             supermarket = "Eroski"
         )
         )
+        println("Cantidad de elementos en _state: ${_state.size}")
     }
 
 

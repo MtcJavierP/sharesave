@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                     }
                     //Definimos la segunda pantalla
                     composable(Router.AddItem.route){
-
+                        println("AddItemScreen se está llamando")
                         AddItemScreen()
                     }
 
