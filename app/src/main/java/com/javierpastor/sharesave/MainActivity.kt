@@ -8,8 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.javierpastor.sharesave.ui.theme.SharesaveTheme
+import com.javierpastor.sharesave.view.AddItemScreen
 import com.javierpastor.sharesave.view.HomeContent
-import com.javierpastor.sharesave.view.AddItem
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     //Definimos la segunda pantalla
                     composable(Router.AddItem.route){
 
-                        AddItem()
+                        AddItemScreen()
                     }
 
                 }
