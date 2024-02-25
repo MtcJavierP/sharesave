@@ -136,8 +136,8 @@ fun HomeContent(navController: NavController) {
                                     .clickable {
                                         when (item) {
                                             "-  Supermercados" -> navController.navigate(Router.Supermarkets.route)
-                                            "-  Ofertas" -> navController.navigate("ruta_ofertas")
-                                            "-  Productos" -> navController.navigate("ruta_productos")
+                                            "-  Ofertas" -> navController.navigate(Router.Offers.route)
+                                            "-  Productos" -> navController.navigate(Router.Products.route)
                                             "-  Ciudad" -> navController.navigate("ruta_ciudad")
                                         }
                                     }

@@ -4,7 +4,10 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class ItemDBHelper(context: Context) :
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+
+class ItemDBHelper @Inject constructor(@ApplicationContext context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {

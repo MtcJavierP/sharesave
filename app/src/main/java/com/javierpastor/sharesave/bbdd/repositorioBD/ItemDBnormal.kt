@@ -1,5 +1,7 @@
 package com.javierpastor.sharesave.bbdd.repositorioBD
 
+
+//esta BBDD la usare para las Ofertas
 object ItemDBnormal {
     const val TABLE_NAME = "item"
     const val COLUMN_NAME = "name"

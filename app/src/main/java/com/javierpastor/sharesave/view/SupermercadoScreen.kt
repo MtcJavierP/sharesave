@@ -38,7 +38,7 @@ import com.javierpastor.sharesave.R
 import com.javierpastor.sharesave.model.SuperMercados
 import kotlinx.coroutines.launch
 
-
+//screen que muestra un listado de supermercados
 @Composable
 fun SupermercadosScreenContent() {
     val context = LocalContext.current

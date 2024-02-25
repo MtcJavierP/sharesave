@@ -5,6 +5,11 @@ sealed class Router(val route: String) {
     object AddItem : Router("AddItem")
 
     object Supermarkets : Router("Supermarkets")
+
+    object Products : Router("Products")
+    object Offers : Router("Offers")
+
+
 }
 
 

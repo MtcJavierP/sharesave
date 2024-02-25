@@ -4,12 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.javierpastor.sharesave.ui.theme.SharesaveTheme
 import com.javierpastor.sharesave.view.AddItemScreen
 import com.javierpastor.sharesave.view.HomeContent
+import com.javierpastor.sharesave.view.OfertaScreenContent
+import com.javierpastor.sharesave.view.OfertaViewModel
+import com.javierpastor.sharesave.view.ProductScreenContent
 import com.javierpastor.sharesave.view.SupermercadosScreenContent
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,12 +41,20 @@ class MainActivity : ComponentActivity() {
                     //Definimos la segunda pantalla
                     composable(Router.AddItem.route){
                         println("AddItemScreen se está llamando")
-                        AddItemScreen()
+                        AddItemScreen(navController = navController)
                     }
                     composable(Router.Supermarkets.route){
                         // Replace this with the actual composable function for your Supermarkets screen
                         SupermercadosScreenContent()
                     }
+                    composable(Router.Products.route){
+                        // Replace this with the actual composable function for your Supermarkets screen
+                        ProductScreenContent()
+                    }
+                    composable(Router.Offers.route){
+                        // Replace this with the actual composable function for your Supermarkets screen
+                        val viewModel: OfertaViewModel = hiltViewModel()
+                        OfertaScreenContent(viewModel)                    }
 
                 }
 

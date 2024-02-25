@@ -54,7 +54,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.9"
     }
     packaging {
         resources {
@@ -83,8 +83,8 @@ dependencies {
 
     //HILT
 
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.46")
+    kapt("com.google.dagger:hilt-android-compiler:2.46")
     implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
@@ -109,6 +109,10 @@ dependencies {
     kapt("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:2.6.1")
 
+
+    //lifecycle
+    implementation ("androidx.compose.runtime:runtime-livedata:1.1.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
     //ksp("com.google.devtools.ksp:symbol-processing-api:1.9.0-1.0.13")
     //ksp("com.google.devtools.ksp:symbol-processing:1.9.0-1.0.13")
 

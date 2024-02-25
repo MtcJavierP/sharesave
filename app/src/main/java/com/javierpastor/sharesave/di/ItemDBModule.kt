@@ -4,6 +4,8 @@ package com.javierpastor.sharesave.di
 
 import android.content.Context
 import androidx.room.Room
+import com.javierpastor.sharesave.bbdd.repositorioBD.ItemDBHelper
+import com.javierpastor.sharesave.bbdd.repositorioBD.OfertaRepository
 import com.javierpastor.sharesave.bbdd.room.AppDatabase
 import com.javierpastor.sharesave.bbdd.room.ItemDao
 import dagger.Module
@@ -30,5 +32,17 @@ object DatabaseModule {
     @Provides
     fun provideItemDao(database: AppDatabase): ItemDao {
         return database.itemDao()
+    }
+
+
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object RepositoryModule {
+
+    @Provides
+    fun provideOfertaRepository(dbHelper: ItemDBHelper): OfertaRepository {
+        return OfertaRepository(dbHelper)
     }
 }

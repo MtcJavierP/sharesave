@@ -35,7 +35,8 @@ import javax.inject.Inject
 //
 //}
 
-
+//Metodo modificado para que se pueda inyectar en cualquier parte de la aplicacion y
+// poder meter datos en la base de datos room
 @HiltViewModel
 class AddItemViewModel @Inject constructor(private val itemDao: ItemDao) : ViewModel(){
 
