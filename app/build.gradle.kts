@@ -1,10 +1,19 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
-
     id("dagger.hilt.android.plugin")
     id("com.google.dagger.hilt.android")
+
+   // kotlin("plugin.serialization")version "1.9.0"
 }
 
 android {
@@ -89,6 +98,29 @@ dependencies {
     val nav_version = "2.5.3"
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    //ICONS EXTENDED
+    implementation("androidx.compose.material:material-icons-extended:1.6.1")
+
+    //ROOM
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:2.6.1")
+
+    //ksp("com.google.devtools.ksp:symbol-processing-api:1.9.0-1.0.13")
+    //ksp("com.google.devtools.ksp:symbol-processing:1.9.0-1.0.13")
+
+
+//    implementation("androidx.room:room-runtime:$room_version")
+//    annotationProcessor("androidx.room:room-compiler:$room_version")
+//    // To use Kotlin Symbol Processing (KSP)
+//    kapt("androidx.room:room-compiler:$room_version")
+//    implementation("androidx.room:room-ktx:2.6.1")
+//
+//    ksp("com.google.devtools.ksp:symbol-processing-api:1.9.0-1.0.13")
+//    ksp("com.google.devtools.ksp:symbol-processing:1.9.0-1.0.13")
 
 }
 kapt {
