@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -34,21 +35,40 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.javierpastor.sharesave.R
 import com.javierpastor.sharesave.model.SuperMercados
 import kotlinx.coroutines.launch
 
 //screen que muestra un listado de supermercados
 @Composable
-fun SupermercadosScreenContent() {
+fun SupermercadosScreenContent(viewModel: SupermercadoViewModel = hiltViewModel()) {
     val context = LocalContext.current
     val rvState = rememberLazyListState() //esto es para recordar el estado de la lista
     val coroutinesScope = rememberCoroutineScope()
+
+    val numSupermercados by viewModel.numSupermercados.observeAsState(0)
+    val numSupermercadosSharedPref = viewModel.numSupermercadosSharedPref
+
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+
+                Text(text = "Supermercados", modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally), fontSize = 24.sp,fontWeight = FontWeight.Bold,
+                    textDecoration = TextDecoration.Underline)
+                Text(text = "Número de supermercados (DataStore): $numSupermercados")
+                Text(text = "Número de supermercados (SharedPreferences): $numSupermercadosSharedPref")
+                Spacer(modifier = Modifier.padding(16.dp))
+                // Rest of your code...
+
+
+
+
+
         Text(text = "Supermercados", modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally), fontSize = 24.sp,fontWeight = FontWeight.Bold,
             textDecoration = TextDecoration.Underline)
         Spacer(modifier = Modifier.padding(16.dp))
@@ -126,9 +146,8 @@ fun ItemSupermercado(supermercado: SuperMercados, onItemSelected: (SuperMercados
 
 
 
-
 fun getSuperMercados(): List<SuperMercados> {
-    return listOf( //este es el listado de supermercados
+    val supermercados = listOf(
         SuperMercados("Mercadona", "https://www.mercadona.es/", R.drawable.mercadona),
         SuperMercados("Carrefour", "https://www.carrefour.es/", R.drawable.carrefour),
         SuperMercados("Lidl", "https://www.lidl.es/", R.drawable.lidl),
@@ -136,4 +155,7 @@ fun getSuperMercados(): List<SuperMercados> {
         SuperMercados("Dia", "https://www.dia.es/", R.drawable.dia),
         SuperMercados("Alcampo", "https://www.compraonline.alcampo.es/", R.drawable.alcampo),
     )
+    return supermercados
 }
+
+val numSupermercados = getSuperMercados().size

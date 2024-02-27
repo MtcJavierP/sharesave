@@ -126,6 +126,23 @@ dependencies {
 //    ksp("com.google.devtools.ksp:symbol-processing-api:1.9.0-1.0.13")
 //    ksp("com.google.devtools.ksp:symbol-processing:1.9.0-1.0.13")
 
+
+    //SharedPreferences y DataStore
+
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // optional - RxJava2 support
+    implementation("androidx.datastore:datastore-preferences-rxjava2:1.0.0")
+
+    // optional - RxJava3 support
+    implementation("androidx.datastore:datastore-preferences-rxjava3:1.0.0")
+
+    implementation("androidx.datastore:datastore-preferences-core:1.0.0")
+    implementation("androidx.datastore:datastore-core:1.0.0")
+
+
+
+
 }
 kapt {
     correctErrorTypes = true
