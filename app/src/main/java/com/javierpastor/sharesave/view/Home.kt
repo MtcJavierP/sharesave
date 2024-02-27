@@ -138,7 +138,7 @@ fun HomeContent(navController: NavController) {
                                             "-  Supermercados" -> navController.navigate(Router.Supermarkets.route)
                                             "-  Ofertas" -> navController.navigate(Router.Offers.route)
                                             "-  Productos" -> navController.navigate(Router.Products.route)
-                                            "-  Ciudad" -> navController.navigate("ruta_ciudad")
+                                            "-  Ciudad" -> navController.navigate(Router.Cities.route)
                                         }
                                     }
                             )

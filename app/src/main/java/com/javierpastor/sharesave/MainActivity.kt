@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.javierpastor.sharesave.ui.theme.SharesaveTheme
 import com.javierpastor.sharesave.view.AddItemScreen
+import com.javierpastor.sharesave.view.CiudadScreenContent
 import com.javierpastor.sharesave.view.HomeContent
 import com.javierpastor.sharesave.view.OfertaScreenContent
 import com.javierpastor.sharesave.view.OfertaViewModel
@@ -54,7 +55,14 @@ class MainActivity : ComponentActivity() {
                     composable(Router.Offers.route){
                         // Replace this with the actual composable function for your Supermarkets screen
                         val viewModel: OfertaViewModel = hiltViewModel()
-                        OfertaScreenContent(viewModel)                    }
+                        OfertaScreenContent(viewModel)
+                    }
+                    composable(Router.Cities.route){
+                        // Replace this with the actual composable function for your Supermarkets screen
+
+                        CiudadScreenContent()
+                    }
+
 
                 }
 

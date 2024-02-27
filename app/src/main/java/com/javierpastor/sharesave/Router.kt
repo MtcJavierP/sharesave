@@ -9,6 +9,8 @@ sealed class Router(val route: String) {
     object Products : Router("Products")
     object Offers : Router("Offers")
 
+    object Cities : Router("Cities")
+
 
 }
 
