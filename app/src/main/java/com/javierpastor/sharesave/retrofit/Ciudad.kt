@@ -20,21 +20,20 @@ import kotlinx.serialization.Serializable
 //    val nombre: String
 //)
 
-@kotlinx.serialization.Serializable
+@Serializable
 data class Ciudad(
     @SerialName("code") val id: String,
     @SerialName("label") val nombre: String,
-    @SerialName("provinces") val provincias: List<Provincia>
 )
 
-@kotlinx.serialization.Serializable
+
 data class Provincia(
     @SerialName("code") val id: String,
     @SerialName("label") val nombre: String,
     @SerialName("towns") val poblaciones: List<Poblacion>
 )
 
-@Serializable
+
 data class Poblacion(
     @SerialName("code") val id: String,
     @SerialName("label") val nombre: String

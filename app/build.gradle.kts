@@ -13,7 +13,8 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("com.google.dagger.hilt.android")
 
-   // kotlin("plugin.serialization")version "1.9.0"
+
+    kotlin("plugin.serialization")version "1.9.22"
 }
 
 android {

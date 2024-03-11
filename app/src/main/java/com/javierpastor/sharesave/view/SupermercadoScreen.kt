@@ -41,6 +41,7 @@ import com.javierpastor.sharesave.model.SuperMercados
 import kotlinx.coroutines.launch
 
 //screen que muestra un listado de supermercados
+/*
 @Composable
 fun SupermercadosScreenContent(viewModel: SupermercadoViewModel = hiltViewModel()) {
     val context = LocalContext.current
@@ -144,7 +145,91 @@ fun ItemSupermercado(supermercado: SuperMercados, onItemSelected: (SuperMercados
     }
 }
 
+*/
+@Composable
+fun SupermercadosScreen(viewModel: SupermercadoViewModel = hiltViewModel()) {
+    SupermercadosScreenContent(viewModel)
+}
 
+@Composable
+fun SupermercadosScreenContent(viewModel: SupermercadoViewModel) {
+    val context = LocalContext.current
+    val rvState = rememberLazyListState()
+    val coroutinesScope = rememberCoroutineScope()
+
+    val numSupermercadosState by viewModel.numSupermercados.collectAsState(initial = 0)
+    val numSupermercadosSharedPref = viewModel.numSupermercadosSharedPref
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Supermercados", modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally), fontSize = 24.sp,fontWeight = FontWeight.Bold,
+            textDecoration = TextDecoration.Underline)
+        Text(text = "Número de supermercados (DataStore): $numSupermercadosState")
+        Text(text = "Número de supermercados (SharedPreferences): $numSupermercadosSharedPref")
+        Spacer(modifier = Modifier.padding(16.dp))
+
+        Text(text = "Supermercados", modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally), fontSize = 24.sp,fontWeight = FontWeight.Bold,
+            textDecoration = TextDecoration.Underline)
+        Spacer(modifier = Modifier.padding(16.dp))
+        LazyColumn(
+            state = rvState,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier
+                .weight(1f)
+                .align(Alignment.CenterHorizontally),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            items(getSuperMercados()) { supermercado ->
+                ItemSupermercado(supermercado = supermercado)
+                { Toast.makeText(context, it.name, Toast.LENGTH_SHORT).show() }
+            }
+        }
+        val showbutton by remember { derivedStateOf { rvState.firstVisibleItemIndex > 0 } }
+        if (showbutton) {
+            Button(
+                onClick = {coroutinesScope.launch { rvState.animateScrollToItem(0) }  },
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(16.dp)
+            ) {
+                Text(text = "Volver al inicio")
+            }
+        }
+    }
+}
+
+@Composable
+fun ItemSupermercado(supermercado: SuperMercados, onItemSelected: (SuperMercados) -> Unit = {}) {
+    val context = LocalContext.current
+
+    Card(border = BorderStroke(2.dp, Color(0xFF8FBC8F)),modifier= Modifier
+        .width(300.dp)
+        .clickable { onItemSelected(supermercado) }) {
+        Column (Modifier.align(Alignment.CenterHorizontally)){
+            Image(
+                painter = painterResource(id = supermercado.image),
+                contentDescription = "supermercado avatar",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Text(text = supermercado.name, modifier=Modifier.align(Alignment.CenterHorizontally))
+            Text(
+                text = "LINK",
+                color = Color.Blue,
+                modifier = Modifier
+                    .clickable {
+                        val uri = Uri.parse(supermercado.website)
+                        val intent = Intent(Intent.ACTION_VIEW, uri)
+                        context.startActivity(intent)
+                    }
+                    .align(Alignment.CenterHorizontally)
+            )
+        }
+    }
+}
 
 
 fun getSuperMercados(): List<SuperMercados> {

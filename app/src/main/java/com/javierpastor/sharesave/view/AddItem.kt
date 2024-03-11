@@ -65,11 +65,28 @@ fun  AddItemScreen(viewModel: AddItemViewModel = hiltViewModel()) {
 */
 @Composable
 fun AddItemScreen(viewModel: AddItemViewModel = hiltViewModel(),navController: NavController) {
+
+    AddItemContent(onItemClick = { item ->
+        viewModel.insertItem(item)
+        navController.navigate("home")
+    })
+
+
+
+
+    //ver channel para sustituir el navigate
+
+
+
+}
+
+@Composable
+fun AddItemContent(onItemClick: (Item) -> Unit ,) {
+
     var name by remember { mutableStateOf("") }
     var price by remember { mutableStateOf("") }
     var supermarket by remember { mutableStateOf("") }
     val context = LocalContext.current
-
 
     Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -130,14 +147,14 @@ fun AddItemScreen(viewModel: AddItemViewModel = hiltViewModel(),navController: N
                 precio = priceAsDouble,
                 supermercado = supermarket,
 
-            )
-            viewModel.insertItem(item)// esto es para insertar el item en la base de datos Room
+                )
+            onItemClick(item) // esto es para insertar el item en la base de datos Room
             // Mostrar un mensaje de agradecimiento
             Toast.makeText(context, "Gracias por compartir!", Toast.LENGTH_SHORT).show()
             // Navegar de nuevo a la pantalla de inicio
-            navController.navigate("home")
+
         }) {
             Text("Guardar")
         }
-    }
-}
+    }}
+

@@ -1,13 +1,12 @@
 package com.javierpastor.sharesave.view
 
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.javierpastor.sharesave.retrofit.Ciudad
 
 
 //@Composable
@@ -22,12 +21,12 @@ import com.javierpastor.sharesave.retrofit.Ciudad
 
 @Composable
 fun CiudadScreenContent(viewModel: CiudadViewModel = hiltViewModel()) {
-    val ciudadesState by viewModel.ciudades.observeAsState(initial = emptyList<Ciudad>())
-    val ciudades = ciudadesState ?: emptyList()
+    val ciudadesState by viewModel.state.collectAsState( emptyList<String>())
+
 
     LazyColumn {
-        itemsIndexed(ciudades) { index, ciudad ->
-            Text(ciudad.nombre ?: "Nombre no disponible")
+        items(ciudadesState) {
+            Text(it)
         }
     }
 }

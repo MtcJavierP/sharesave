@@ -15,6 +15,7 @@ import com.javierpastor.sharesave.view.HomeContent
 import com.javierpastor.sharesave.view.OfertaScreenContent
 import com.javierpastor.sharesave.view.OfertaViewModel
 import com.javierpastor.sharesave.view.ProductScreenContent
+import com.javierpastor.sharesave.view.SupermercadoViewModel
 import com.javierpastor.sharesave.view.SupermercadosScreenContent
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,8 +47,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(Router.Supermarkets.route){
                         // Replace this with the actual composable function for your Supermarkets screen
-                        SupermercadosScreenContent()
-                    }
+                        val viewModel: SupermercadoViewModel = hiltViewModel()
+                        // Pass the viewModel to SupermercadosScreenContent
+                        SupermercadosScreenContent(viewModel)                    }
                     composable(Router.Products.route){
                         // Replace this with the actual composable function for your Supermarkets screen
                         ProductScreenContent()

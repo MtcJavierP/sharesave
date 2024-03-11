@@ -41,8 +41,7 @@ import javax.inject.Inject
 class AddItemViewModel @Inject constructor(private val repository: ItemRepository) : ViewModel(){
 
     var _state:List<Item> = emptyList()
-    val state
-        get() = _state
+    val state=_state
 
 
     fun insertItem(item: Item) = viewModelScope.launch {

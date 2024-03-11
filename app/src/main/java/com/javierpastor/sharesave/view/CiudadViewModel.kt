@@ -1,12 +1,11 @@
 package com.javierpastor.sharesave.view
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.javierpastor.sharesave.retrofit.CiudadAPI
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 //class CiudadViewModel(private val ciudadAPI: CiudadAPI = RetrofitInstance.ciudadAPI) : ViewModel() {
@@ -23,13 +22,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CiudadViewModel @Inject constructor(private val ciudadAPI: CiudadAPI) : ViewModel() {
-    val ciudades = flow {
-        try {
-            val data = ciudadAPI.getCiudades()
-            Log.d("CiudadViewModel", data.toString())  // Imprime los datos en Logcat
-            emit(data)
-        } catch (e: Exception) {
-            e.printStackTrace()  // Imprime el error en la consola
+
+    var _state= MutableStateFlow(emptyList<String>())
+    val state=_state
+
+    init {
+        viewModelScope.launch {
+             _state.value=ciudadAPI.getCiudades().map {
+                 ciudad ->
+                    ciudad.nombre
+                }
+            }
         }
-    }.asLiveData(Dispatchers.IO)
-}
+    }
+
+
+
+
