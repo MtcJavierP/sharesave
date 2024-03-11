@@ -20,9 +20,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -47,7 +47,8 @@ fun SupermercadosScreenContent(viewModel: SupermercadoViewModel = hiltViewModel(
     val rvState = rememberLazyListState() //esto es para recordar el estado de la lista
     val coroutinesScope = rememberCoroutineScope()
 
-    val numSupermercados by viewModel.numSupermercados.observeAsState(0)
+  //  val numSupermercados by viewModel.numSupermercados.observeAsState(0)
+    val numSupermercados by viewModel.numSupermercados.collectAsState(initial = 0)
     val numSupermercadosSharedPref = viewModel.numSupermercadosSharedPref
 
 

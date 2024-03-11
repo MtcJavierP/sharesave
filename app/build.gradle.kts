@@ -157,6 +157,8 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
+
 
 }
 kapt {

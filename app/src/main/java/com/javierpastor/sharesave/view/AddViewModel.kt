@@ -3,7 +3,7 @@ package com.javierpastor.sharesave.view
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.javierpastor.sharesave.bbdd.room.Item
-import com.javierpastor.sharesave.bbdd.room.ItemDao
+import com.javierpastor.sharesave.bbdd.room.ItemRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,7 +38,7 @@ import javax.inject.Inject
 //Metodo modificado para que se pueda inyectar en cualquier parte de la aplicacion y
 // poder meter datos en la base de datos room
 @HiltViewModel
-class AddItemViewModel @Inject constructor(private val itemDao: ItemDao) : ViewModel(){
+class AddItemViewModel @Inject constructor(private val repository: ItemRepository) : ViewModel(){
 
     var _state:List<Item> = emptyList()
     val state
@@ -46,8 +46,7 @@ class AddItemViewModel @Inject constructor(private val itemDao: ItemDao) : ViewM
 
 
     fun insertItem(item: Item) = viewModelScope.launch {
-        itemDao.insert(item)
-    }
+        repository.insert(item)    }
 }
 
 data class Item (
